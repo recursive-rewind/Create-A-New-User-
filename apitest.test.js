@@ -1,7 +1,9 @@
 var supertest = require('supertest')
 const request = supertest('https://reqres.in/')
 
-it('Post-create a new User',() =>
+jest.setTimeout(60*1000)
+
+it('Post-create a new User',async() =>
 { 
     let user=
     {
@@ -10,13 +12,10 @@ it('Post-create a new User',() =>
          
     }
     
-    const response =   request.post('api/users').send(user)
-    console.log(response)
-    jest.setTimeout(() => {
-        
-    }, 10000);
+    const response = await  request.post('api/users').send(user)
    
-    expect(response.status).toBe(undefined)
+   
+    expect(response.status).toBe(201)
     
    
 })
